@@ -6,6 +6,7 @@
 
 body{
     font-family: sans-serif;
+    overflow: hidden;
 }
 
 nav{
@@ -39,11 +40,12 @@ nav{
     }
 
    .menu-toggle{
-    display: flex;
+   
     flex-direction: column;
     height: 20px;
     justify-content: space-between;
     position: relative;
+   
    }
     
    .menu-toggle input{
@@ -53,21 +55,38 @@ nav{
     height: 25px;
     opacity: 0;
     cursor: pointer;
+    z-index: 2;
    }
     .menu-toggle span{
 
-        display: block;
+        // display: block;
         width: 28px;
         height: 3px;
         background-color: #ffffff;
         border-radius: 3px;
+        transition: all 0.5s;
     }
 }
 
+span:nth-child(2){
+    transform-origin: 0 0;
+}
 
+span:nth-child(4){
+    transform-origin: 0 0;
+}
 
 .menu-toggle input:checked ~ span:nth-child(2){
-    background-color: blue;
+    transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.menu-toggle input:checked ~ span:nth-child(4){
+    transform: rotate(-45deg) translate(-1px, 0);
+}
+
+.menu-toggle input:checked ~ span:nth-child(3){
+    transform: scale(0);
+    opacity:0;
 }
 
 
@@ -76,9 +95,34 @@ nav{
     nav ul{
         width: 50%;
     }
+
+    .menu-toggle{
+        display: none;
+    }
 }
 @media screen and (max-width:576px){
     nav ul{
-        display: none;
+        position: absolute;
+        right: 0;
+        top:0;
+        flex-direction: column;
+        height: 100vh;
+        background-color: #191B1D;
+        z-index: -1;
+        justify-content: space-around;
+        align-items: center;
+        width: 50%;
+        transform: translateX(100%);
+        transition: all 1s;
+    }
+
+   
+
+    .menu-toggle{
+        display: flex;
+    }
+
+    nav ul.slide{
+        transform: translate(0);
     }
 }
